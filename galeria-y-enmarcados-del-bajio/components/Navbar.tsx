@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   return (
@@ -22,14 +23,16 @@ export default function Navbar() {
               </span>
             </Link>
           </div>
-          <div className="hidden md:flex space-x-8">
-            <Link href="#virtual-framer" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Virtual Framer</Link>
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/virtual-framer" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Virtual Framer</Link>
             <Link href="#services" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Services</Link>
-            <Link href="#portfolio" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Portfolio</Link>
+            <Link href="/gallery" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Portfolio</Link>
             <Link href="#about" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">About</Link>
             <Link href="#contact" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Contact</Link>
+            <ThemeToggle />
           </div>
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggle />
             <button className="text-brand-text hover:text-brand-oak transition-colors">
               <Menu className="h-6 w-6" />
             </button>
