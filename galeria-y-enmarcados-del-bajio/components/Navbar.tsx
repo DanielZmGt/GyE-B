@@ -23,6 +23,7 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="hidden md:flex space-x-8">
+            <Link href="/tienda" className="text-sm uppercase tracking-widest text-brand-oak font-medium hover:text-brand-walnut transition-colors">Tienda</Link>
             <Link href="#virtual-framer" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Virtual Framer</Link>
             <Link href="#services" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Services</Link>
             <Link href="#portfolio" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Portfolio</Link>
