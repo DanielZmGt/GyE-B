@@ -1,5 +1,5 @@
-import Gallery from '../../components/Gallery'
+import GallerySection from '../../components/organisms/GallerySection'
 
 export default function GalleryPage() {
-  return <Gallery />
+  return <GallerySection />
 }

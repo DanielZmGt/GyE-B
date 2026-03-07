@@ -1,5 +1,5 @@
-import VirtualFramer from '../../components/VirtualFramer'
+import VirtualFramerSection from '../../components/organisms/VirtualFramerSection'
 
 export default function VirtualFramerPage() {
-  return <VirtualFramer />
+  return <VirtualFramerSection />
 }

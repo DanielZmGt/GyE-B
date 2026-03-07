@@ -1,5 +1,5 @@
-import Shop from '../../components/Shop';
+import ShopSection from '../../components/organisms/ShopSection'
 
 export default function TiendaPage() {
-  return <Shop />;
+  return <ShopSection />
 }

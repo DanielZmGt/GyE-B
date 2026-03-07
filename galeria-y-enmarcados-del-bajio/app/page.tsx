@@ -1,16 +1,16 @@
-import Hero from '../components/Hero'
-import Services from '../components/Services'
-import About from '../components/About'
+import Hero from '../components/organisms/Hero'
+import ServicesSection from '../components/organisms/ServicesSection'
+import AboutSection from '../components/organisms/AboutSection'
 
 export default function Home() {
   return (
     <>
       <Hero />
       <div id="services">
-        <Services />
+        <ServicesSection />
       </div>
       <div id="about">
-        <About />
+        <AboutSection />
       </div>
     </>
   )
