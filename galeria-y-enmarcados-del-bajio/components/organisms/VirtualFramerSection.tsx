@@ -135,7 +135,9 @@ export default function VirtualFramerSection() {
               <div
                 className="relative transition-all duration-300 ease-out flex"
                 style={{
-                  border: `${frameSize}px solid transparent`,
+                  borderWidth: `${frameSize}px`,
+                  borderStyle: 'solid',
+                  borderColor: 'transparent',
                   borderImageSource: `url(${selectedMolding})`,
                   borderImageSlice: '30',
                   borderImageRepeat: 'round',
@@ -157,7 +159,7 @@ export default function VirtualFramerSection() {
                       maxWidth: '100%',
                       maxHeight: '50vh',
                       minWidth: '200px',
-                      border: '2px solid white'
+                      border: '1px solid white'
                     }}
                   />
                 </div>

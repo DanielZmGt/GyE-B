@@ -1,20 +1,28 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Galería y Enmarcados del Bajío
 
-# Run and deploy your AI Studio app
+> Premium Virtual Framer & Art Gallery E-Commerce Platform
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/da570a5d-249d-481e-825a-0d347aba3b35
+Welcome to the digital storefront for Galería y Enmarcados del Bajío. This application provides a modern, sleek interface for browsing artwork and a fully interactive virtual framer for custom orders.
 
 ## Run Locally
 
 **Prerequisites:**  Node.js
 
-
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key (if using AI features)
+3. Set up Supabase credentials in your environment variables for database connectivity
+4. Run the app:
    `npm run dev`
+
+## Features
+
+- **Next.js 15 & React 19:** Built on the latest, high-performance app router architecture.
+- **Tailwind CSS & Framer Motion:** Sleek, responsive, and animated UI components.
+- **Virtual Framer Tool:** Interactive canvas for users to preview custom framing, molding, mat sizing, and background colors dynamically.
+- **E-Commerce & Gallery:** Sections for showcasing art pieces (`GallerySection`) and selling artwork/frames (`ShopSection`).
+- **Shopping Cart:** Integrated `CartSidebar` for managing selected items before checkout.
+- **Information Sections:** Comprehensive `Hero`, `Services`, and `About` sections.
+- **Database Integration:** Integrated with Supabase for backend data management.
+- **Vercel Deployment:** Configured for seamless continuous deployment via Vercel.
+- **Customizable Theme:** Clean glassmorphism aesthetic tailored with custom brand colors (e.g., brand-oak, brand-bg) in `tailwind.config.ts`.
