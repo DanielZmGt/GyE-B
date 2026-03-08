@@ -1,7 +1,7 @@
 <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="grain_baseboard">
-      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.08" numOctaves="3" seed="4" result="noise"/>
+    <filter id="grain_zebrawood">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05 0.3" numOctaves="3" seed="28" result="noise"/>
       <feColorMatrix type="matrix" values="
         0 0 0 0 0
         0 0 0 0 0
@@ -12,20 +12,20 @@
   </defs>
   
   <!-- Base Background -->
-  <rect width="100" height="100" fill="#DEB887" />
-  <rect width="100" height="100" fill="#DEB887" filter="url(#grain_baseboard)" />
+  <rect width="100" height="100" fill="#C8A2C8" />
+  <rect width="100" height="100" fill="#C8A2C8" filter="url(#grain_zebrawood)" />
   
   <!-- Top Bevel -->
-  <polygon points="0,0 100,0 70,30 30,30" fill="white" opacity="0.3"/>
+  <polygon points="0,0 100,0 70,30 30,30" fill="white" opacity="0.2"/>
   
   <!-- Bottom Bevel -->
-  <polygon points="0,100 100,100 70,70 30,70" fill="black" opacity="0.4"/>
+  <polygon points="0,100 100,100 70,70 30,70" fill="black" opacity="0.5"/>
   
   <!-- Left Bevel -->
-  <polygon points="0,0 30,30 30,70 0,100" fill="black" opacity="0.2"/>
+  <polygon points="0,0 30,30 30,70 0,100" fill="black" opacity="0.25"/>
   
   <!-- Right Bevel -->
-  <polygon points="100,0 100,100 70,70 70,30" fill="black" opacity="0.32000000000000006"/>
+  <polygon points="100,0 100,100 70,70 70,30" fill="black" opacity="0.4"/>
   
   <!-- Inner Bevel (Shadow) -->
   <rect x="30" y="30" width="40" height="40" fill="none" stroke="black" stroke-width="2" opacity="0.5"/>
