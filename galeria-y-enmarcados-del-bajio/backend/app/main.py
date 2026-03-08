@@ -1,9 +1,10 @@
 from urllib.parse import quote
+from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from .data import mat_color_groups, moldings, portfolio_items, products, services
+from .supabase_client import supabase
 from .models import (
     MatColor,
     MatColorGroup,
@@ -30,7 +31,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"], # Allow all for now, or specify frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -99,80 +100,126 @@ def get_service(s: ServiceInternal, lang: str) -> Service:
 
 
 @app.get("/api/products", response_model=list[Product])
-def get_products_ep(
-    category: str | None = Query(None, description="Filtrar por categoria / Filter by category"),
+async def get_products_ep(
+    category: Optional[str] = Query(None, description="Filtrar por categoria / Filter by category"),
     lang: str = Query("es", description="Language: 'es' or 'en'")
 ):
-    valid_products = products
-    if category:
-        # Check both category_es and category_en to be robust, or just the one matching the lang
-        is_en = lang == "en"
-        valid_products = [p for p in products if (p.category_en if is_en else p.category_es) == category]
+    query = supabase.table("products").select("*")
     
-    return [get_product(p, lang) for p in valid_products]
+    if category:
+        # Check both category_es and category_en to be robust
+        # This is a bit tricky with a single filter in Supabase if we want OR.
+        # But we can just fetch and filter in python for simplicity, or use .or_()
+        pass
+
+    response = query.execute()
+    data = response.data
+
+    products_intl = [ProductInternal(**row) for row in data]
+    
+    if category:
+        is_en = lang == "en"
+        products_intl = [p for p in products_intl if (p.category_en if is_en else p.category_es) == category]
+
+    return [get_product(p, lang) for p in products_intl]
 
 
 @app.get("/api/products/{product_id}", response_model=Product)
-def get_product_ep(product_id: int, lang: str = Query("es", description="Language: 'es' or 'en'")):
-    for p in products:
-        if p.id == product_id:
-            return get_product(p, lang)
-    raise HTTPException(status_code=404, detail="Producto no encontrado" if lang == "es" else "Product not found")
+async def get_product_ep(product_id: int, lang: str = Query("es", description="Language: 'es' or 'en'")):
+    response = supabase.table("products").select("*").eq("id", product_id).single().execute()
+    if not response.data:
+        raise HTTPException(status_code=404, detail="Producto no encontrado" if lang == "es" else "Product not found")
+    
+    p = ProductInternal(**response.data)
+    return get_product(p, lang)
 
 
 # --- Portfolio ---
 
 
 @app.get("/api/portfolio", response_model=list[PortfolioItem])
-def get_portfolio_ep(
-    category: str | None = Query(None, description="Filtrar por categoria / Filter by category"),
+async def get_portfolio_ep(
+    category: Optional[str] = Query(None, description="Filtrar por categoria / Filter by category"),
     lang: str = Query("es", description="Language: 'es' or 'en'")
 ):
-    valid_items = portfolio_items
+    query = supabase.table("portfolio_items").select("*")
+    response = query.execute()
+    data = response.data
+
+    items_intl = [PortfolioItemInternal(**row) for row in data]
+    
     if category:
         is_en = lang == "en"
-        valid_items = [item for item in portfolio_items if (item.category_en if is_en else item.category_es) == category]
+        items_intl = [item for item in items_intl if (item.category_en if is_en else item.category_es) == category]
 
-    return [get_portfolio_item(item, lang) for item in valid_items]
+    return [get_portfolio_item(item, lang) for item in items_intl]
 
 
 @app.get("/api/portfolio/{item_id}", response_model=PortfolioItem)
-def get_portfolio_item_ep(item_id: int, lang: str = Query("es", description="Language: 'es' or 'en'")):
-    for item in portfolio_items:
-        if item.id == item_id:
-            return get_portfolio_item(item, lang)
-    raise HTTPException(status_code=404, detail="Elemento de portafolio no encontrado" if lang == "es" else "Portfolio item not found")
+async def get_portfolio_item_ep(item_id: int, lang: str = Query("es", description="Language: 'es' or 'en'")):
+    response = supabase.table("portfolio_items").select("*").eq("id", item_id).single().execute()
+    if not response.data:
+        raise HTTPException(status_code=404, detail="Elemento de portafolio no encontrado" if lang == "es" else "Portfolio item not found")
+    
+    item = PortfolioItemInternal(**response.data)
+    return get_portfolio_item(item, lang)
 
 
 # --- Moldings & Mat Colors ---
 
 
 @app.get("/api/moldings", response_model=list[Molding])
-def get_moldings_ep(lang: str = Query("es", description="Language: 'es' or 'en'")):
-    return [get_molding(m, lang) for m in moldings]
+async def get_moldings_ep(lang: str = Query("es", description="Language: 'es' or 'en'")):
+    response = supabase.table("moldings").select("*").execute()
+    moldings_intl = [MoldingInternal(**row) for row in response.data]
+    return [get_molding(m, lang) for m in moldings_intl]
 
 
 @app.get("/api/mat-colors", response_model=list[MatColorGroup])
-def get_mat_colors_ep(lang: str = Query("es", description="Language: 'es' or 'en'")):
-    return [get_mat_color_group(g, lang) for g in mat_color_groups]
+async def get_mat_colors_ep(lang: str = Query("es", description="Language: 'es' or 'en'")):
+    # Fetch groups and colors
+    groups_response = supabase.table("mat_color_groups").select("*").execute()
+    colors_response = supabase.table("mat_colors").select("*").execute()
+    
+    groups_data = groups_response.data
+    colors_data = colors_response.data
+    
+    # Map colors to groups
+    groups_intl = []
+    for g in groups_data:
+        group_colors = [MatColorInternal(**c) for c in colors_data if c["group_id"] == g["id"]]
+        groups_intl.append(MatColorGroupInternal(
+            name_en=g["name_en"],
+            name_es=g["name_es"],
+            colors=group_colors
+        ))
+        
+    return [get_mat_color_group(g, lang) for g in groups_intl]
 
 
 # --- Services ---
 
 
 @app.get("/api/services", response_model=list[Service])
-def get_services_ep(lang: str = Query("es", description="Language: 'es' or 'en'")):
-    return [get_service(s, lang) for s in services]
+async def get_services_ep(lang: str = Query("es", description="Language: 'es' or 'en'")):
+    response = supabase.table("services").select("*").execute()
+    services_intl = [ServiceInternal(**row) for row in response.data]
+    return [get_service(s, lang) for s in services_intl]
 
 
 # --- Quotes ---
 
 
 @app.post("/api/quotes", response_model=QuoteResponse)
-def create_quote(request: QuoteRequest, lang: str = Query("es", description="Language: 'es' or 'en'")):
+async def create_quote(request: QuoteRequest, lang: str = Query("es", description="Language: 'es' or 'en'")):
     global _quote_counter
 
-    products_map = {p.id: p for p in products}
+    # Fetch products involved in the quote
+    product_ids = [item.product_id for item in request.items]
+    response = supabase.table("products").select("*").in_("id", product_ids).execute()
+    products_data = response.data
+    products_map = {p["id"]: ProductInternal(**p) for p in products_data}
+    
     total = 0.0
     validated_items: list[QuoteItem] = []
 
@@ -198,9 +245,6 @@ def create_quote(request: QuoteRequest, lang: str = Query("es", description="Lan
     
     total_label = "Total:"
     currency = "USD" if is_en else "MXN"
-    # Actually user rule states: "Currency formatting preference: Use USD ($) for America and MXN ($) for Mexico" 
-    # Usually pricing is identical in the mock. Let's just append MXN since it's a Mexican business, but if it's English maybe it's still MXN or USD.
-    # The prompt user memory says: Use USD ($) for America and MXN ($) for Mexico. So I'll just change the currency label based on language as a simple proxy. (en -> USD, es -> MXN)
     
     lines.append(f"\n{total_label} ${total:,.0f} {currency}")
     if request.message:
