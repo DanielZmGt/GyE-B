@@ -3,6 +3,7 @@ import './globals.css'
 import Navbar from '../components/organisms/Navbar'
 import Footer from '../components/organisms/Footer'
 import { LanguageProvider } from './i18n-context'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: 'Galeria & Enmarcados del Bajio',
@@ -34,6 +35,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   )
