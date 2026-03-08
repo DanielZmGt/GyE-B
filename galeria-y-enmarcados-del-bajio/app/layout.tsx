@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '../components/organisms/Navbar'
 import Footer from '../components/organisms/Footer'
+import { LanguageProvider } from './i18n-context'
 
 export const metadata: Metadata = {
   title: 'Galeria & Enmarcados del Bajio',
@@ -26,12 +27,15 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Navbar />
-        <main className="min-h-screen pt-20">
-          {children}
-        </main>
-        <Footer />
+        <LanguageProvider>
+          <Navbar />
+          <main className="min-h-screen pt-20">
+            {children}
+          </main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   )
 }
+

@@ -7,16 +7,29 @@ import FilterBar from '../molecules/FilterBar';
 import GalleryCard from '../molecules/GalleryCard';
 import Lightbox from '../molecules/Lightbox';
 import { portfolioItems, type PortfolioItem } from '../../data/portfolio';
+import { useLanguage } from '../../app/i18n-context';
 
-const categories = ['All', 'Framing', 'Mounting', 'Maintenance'];
+const categoryKeys = ['all', 'framing', 'mounting', 'maintenance'];
 
 export default function GallerySection() {
-  const [filter, setFilter] = useState('All');
+  const { lang, t } = useLanguage();
+  const [filterKey, setFilterKey] = useState('all');
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
 
-  const filteredItems = filter === 'All'
+  const categories = categoryKeys.map(k => t(`gallery.categories.${k}`));
+  const activeCategory = t(`gallery.categories.${filterKey}`);
+
+  const handleFilterChange = (selectedLocalCat: string) => {
+    const key = categoryKeys.find(k => t(`gallery.categories.${k}`) === selectedLocalCat) || 'all';
+    setFilterKey(key);
+  };
+
+  const filteredItems = filterKey === 'all'
     ? portfolioItems
-    : portfolioItems.filter(item => item.category === filter);
+    : portfolioItems.filter(item => {
+      const itemCat = lang === 'en' ? item.category_en : item.category_es;
+      return itemCat === activeCategory;
+    });
 
   return (
     <section id="portfolio" className="py-24">
@@ -28,12 +41,12 @@ export default function GallerySection() {
             viewport={{ once: true }}
           >
             <SectionTitle
-              title="Selected Works"
-              subtitle="A curated selection from our 2015-2018 archive, showcasing our dedication to craftsmanship and detail."
+              title={t('gallery.title')}
+              subtitle={t('gallery.subtitle')}
             />
           </motion.div>
 
-          <FilterBar categories={categories} active={filter} onChange={setFilter} />
+          <FilterBar categories={categories} active={activeCategory} onChange={handleFilterChange} />
         </div>
 
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

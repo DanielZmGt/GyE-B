@@ -1,7 +1,10 @@
+"use client";
+
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { X } from 'lucide-react';
 import type { PortfolioItem } from '../../data/portfolio';
+import { useLanguage } from '../../app/i18n-context';
 
 type LightboxProps = {
   item: PortfolioItem;
@@ -9,6 +12,11 @@ type LightboxProps = {
 };
 
 export default function Lightbox({ item, onClose }: LightboxProps) {
+  const { lang, t } = useLanguage();
+  const title = lang === 'en' ? item.title_en : item.title_es;
+  const category = lang === 'en' ? item.category_en : item.category_es;
+  const desc = lang === 'en' ? item.desc_en : item.desc_es;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -28,20 +36,20 @@ export default function Lightbox({ item, onClose }: LightboxProps) {
         <div className="relative w-full aspect-[4/3] md:w-2/3">
           <Image
             src={`/assets/${item.file}`}
-            alt={item.title}
+            alt={title}
             fill
             className="object-contain"
           />
         </div>
         <div className="w-full md:w-1/3 text-white">
-          <span className="text-brand-oak text-sm uppercase tracking-[0.2em] mb-4 block">{item.category}</span>
-          <h3 className="font-serif text-3xl md:text-5xl mb-6">{item.title}</h3>
+          <span className="text-brand-oak text-sm uppercase tracking-[0.2em] mb-4 block">{category}</span>
+          <h3 className="font-serif text-3xl md:text-5xl mb-6">{title}</h3>
           <p className="text-gray-400 font-light leading-relaxed mb-8">
-            {item.desc}
+            {desc}
           </p>
           <div className="border-t border-white/10 pt-8">
-            <p className="text-xs uppercase tracking-widest text-white/50 mb-2">Project Period</p>
-            <p className="font-light italic text-brand-oak">2015 - 2018 Archive</p>
+            <p className="text-xs uppercase tracking-widest text-white/50 mb-2">{t('lightbox.projectPeriod')}</p>
+            <p className="font-light italic text-brand-oak">{t('lightbox.archiveDate')}</p>
           </div>
         </div>
       </div>

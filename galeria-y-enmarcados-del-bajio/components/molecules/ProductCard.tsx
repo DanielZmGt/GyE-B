@@ -1,8 +1,11 @@
+"use client";
+
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { Plus, Minus } from 'lucide-react';
 import type { Product } from '../../data/products';
 import { formatPrice } from '../../data/products';
+import { useLanguage } from '../../app/i18n-context';
 
 type ProductCardProps = {
   product: Product;
@@ -12,6 +15,11 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({ product, quantity, onAdd, onUpdateQuantity }: ProductCardProps) {
+  const { lang, t } = useLanguage();
+  const title = lang === 'en' ? product.title_en : product.title_es;
+  const description = lang === 'en' ? product.desc_en : product.desc_es;
+  const category = lang === 'en' ? product.category_en : product.category_es;
+
   return (
     <motion.div
       layout
@@ -24,21 +32,21 @@ export default function ProductCard({ product, quantity, onAdd, onUpdateQuantity
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={`/assets/${product.file}`}
-          alt={product.title}
+          alt={title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
         <div className="absolute top-3 right-3">
           <span className="bg-brand-walnut/80 text-white text-xs uppercase tracking-wider px-3 py-1 backdrop-blur-sm">
-            {product.category}
+            {category}
           </span>
         </div>
       </div>
 
       <div className="p-5">
-        <h3 className="font-serif text-xl mb-1">{product.title}</h3>
+        <h3 className="font-serif text-xl mb-1">{title}</h3>
         <p className="text-brand-text-muted text-sm font-light leading-relaxed mb-4 line-clamp-2">
-          {product.desc}
+          {description}
         </p>
 
         <div className="flex items-center justify-between">
@@ -68,7 +76,7 @@ export default function ProductCard({ product, quantity, onAdd, onUpdateQuantity
               className="flex items-center gap-2 px-4 py-2 bg-brand-walnut text-white text-sm uppercase tracking-wider hover:bg-brand-oak transition-colors rounded-sm"
             >
               <Plus className="w-4 h-4" />
-              Agregar
+              {lang === 'en' ? 'Add' : 'Agregar'}
             </button>
           )}
         </div>

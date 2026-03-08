@@ -1,9 +1,18 @@
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu } from 'lucide-react';
+import { Menu, Globe } from 'lucide-react';
 import ThemeToggle from '../atoms/ThemeToggle';
+import { useLanguage } from '../../app/i18n-context';
 
 export default function Navbar() {
+  const { t, lang, setLang } = useLanguage();
+
+  const toggleLanguage = () => {
+    setLang(lang === 'en' ? 'es' : 'en');
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-brand-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,15 +33,32 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/tienda" className="text-sm uppercase tracking-widest text-brand-oak font-medium hover:text-brand-walnut transition-colors">Tienda</Link>
-            <Link href="/virtual-framer" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Virtual Framer</Link>
-            <Link href="#services" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Services</Link>
-            <Link href="/gallery" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Portfolio</Link>
-            <Link href="#about" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">About</Link>
-            <Link href="#contact" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">Contact</Link>
-            <ThemeToggle />
+            <Link href="/tienda" className="text-sm uppercase tracking-widest text-brand-oak font-medium hover:text-brand-walnut transition-colors">{t('nav.shop')}</Link>
+            <Link href="/virtual-framer" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">{t('nav.virtualFramer')}</Link>
+            <Link href="#services" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">{t('nav.services')}</Link>
+            <Link href="/gallery" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">{t('nav.portfolio')}</Link>
+            <Link href="#about" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">{t('nav.about')}</Link>
+            <Link href="#contact" className="text-sm uppercase tracking-widest text-brand-text-muted hover:text-brand-oak transition-colors">{t('nav.contact')}</Link>
+
+            <div className="flex items-center gap-4 border-l border-brand-surface pl-8">
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-2 text-sm uppercase tracking-widest text-brand-text hover:text-brand-oak transition-colors"
+                title="Toggle Language"
+              >
+                <Globe className="w-4 h-4" />
+                <span>{lang.toUpperCase()}</span>
+              </button>
+              <ThemeToggle />
+            </div>
           </div>
           <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={toggleLanguage}
+              className="text-xs uppercase tracking-widest text-brand-text hover:text-brand-oak transition-colors"
+            >
+              {lang.toUpperCase()}
+            </button>
             <ThemeToggle />
             <button className="text-brand-text hover:text-brand-oak transition-colors">
               <Menu className="h-6 w-6" />

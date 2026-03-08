@@ -5,8 +5,10 @@ import SectionTitle from '../atoms/SectionTitle';
 import ColorSwatch from '../atoms/ColorSwatch';
 import MoldingOption from '../molecules/MoldingOption';
 import { moldings, matColorGroups } from '../../data/moldings';
+import { useLanguage } from '../../app/i18n-context';
 
 export default function VirtualFramerSection() {
+  const { t, lang } = useLanguage();
   const [selectedMolding, setSelectedMolding] = useState(moldings[0].file);
   const [previewImage, setPreviewImage] = useState('/assets/wedding-portrait.png');
   const [frameSize, setFrameSize] = useState(40);
@@ -33,8 +35,8 @@ export default function VirtualFramerSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16">
           <SectionTitle
-            title="Virtual Framer"
-            subtitle="Design your custom frame. Adjust the molding, matting size, and colors to create the perfect museum-quality piece."
+            title={t('framer.title')}
+            subtitle={t('framer.subtitle')}
             centered
           />
         </div>
@@ -46,11 +48,11 @@ export default function VirtualFramerSection() {
 
             {/* Molding Selector */}
             <div>
-              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-4 border-b border-brand-oak/20 pb-2">1. Frame Style</h3>
+              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-4 border-b border-brand-oak/20 pb-2">{t('framer.step1')}</h3>
               <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                 {moldings.map((molding) => (
                   <MoldingOption
-                    key={molding.name}
+                    key={molding.name_en}
                     molding={molding}
                     selected={selectedMolding === molding.file}
                     onClick={() => setSelectedMolding(molding.file)}
@@ -61,11 +63,11 @@ export default function VirtualFramerSection() {
 
             {/* Mat Board Settings */}
             <div>
-              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-4 border-b border-brand-oak/20 pb-2">2. Mat Board</h3>
+              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-4 border-b border-brand-oak/20 pb-2">{t('framer.step2')}</h3>
 
               <div className="mb-6">
-                <label className="text-xs text-brand-text-muted uppercase mb-2 block flex justify-between">
-                  <span>Mat Size</span>
+                <label className="text-xs text-brand-text-muted uppercase mb-2 flex justify-between">
+                  <span>{t('framer.matSize')}</span>
                   <span className="text-brand-oak font-bold">{matWidth}px</span>
                 </label>
                 <input
@@ -80,14 +82,16 @@ export default function VirtualFramerSection() {
 
               <div className="space-y-4">
                 {matColorGroups.map((group) => (
-                  <div key={group.name}>
-                    <h4 className="text-[10px] uppercase tracking-widest text-brand-text-muted mb-2">{group.name}</h4>
+                  <div key={group.name_en}>
+                    <h4 className="text-[10px] uppercase tracking-widest text-brand-text-muted mb-2">
+                      {lang === 'en' ? group.name_en : group.name_es}
+                    </h4>
                     <div className="grid grid-cols-6 gap-2">
                       {group.colors.map((color) => (
                         <ColorSwatch
-                          key={color.name}
+                          key={color.name_en}
                           color={color.value}
-                          name={color.name}
+                          name={lang === 'en' ? color.name_en : color.name_es}
                           selected={matColor === color.value}
                           onClick={() => setMatColor(color.value)}
                         />
@@ -100,7 +104,7 @@ export default function VirtualFramerSection() {
 
             {/* Frame Width */}
             <div>
-              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-4 border-b border-brand-oak/20 pb-2">3. Frame Thickness</h3>
+              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-4 border-b border-brand-oak/20 pb-2">{t('framer.step3')}</h3>
               <input
                 type="range"
                 min="20"
@@ -110,8 +114,8 @@ export default function VirtualFramerSection() {
                 className="w-full accent-brand-oak cursor-pointer"
               />
               <div className="flex justify-between text-[10px] uppercase tracking-tighter text-brand-text-muted mt-2">
-                <span>Thin</span>
-                <span>Wide</span>
+                <span>{t('framer.thin')}</span>
+                <span>{t('framer.wide')}</span>
               </div>
             </div>
           </div>
@@ -120,7 +124,7 @@ export default function VirtualFramerSection() {
           <div className="w-full lg:w-3/4 flex flex-col items-center sticky top-8">
             <div className="mb-8 w-full flex justify-center">
               <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-8 py-3 rounded-sm uppercase tracking-widest text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-300">
-                Upload Your Artwork
+                {t('framer.upload')}
                 <input
                   type="file"
                   className="hidden"

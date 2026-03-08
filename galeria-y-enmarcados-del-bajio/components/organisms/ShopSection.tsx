@@ -8,17 +8,30 @@ import FilterBar from '../molecules/FilterBar';
 import ProductCard from '../molecules/ProductCard';
 import CartSidebar, { type CartEntry } from './CartSidebar';
 import { products, type Product } from '../../data/products';
+import { useLanguage } from '../../app/i18n-context';
 
-const categories = ['Todos', 'Enmarcado', 'Montaje', 'Restauracion'];
+const categoryKeys = ['all', 'framing', 'mounting', 'restoration'];
 
 export default function ShopSection() {
-  const [filter, setFilter] = useState('Todos');
+  const { lang, t } = useLanguage();
+  const [filterKey, setFilterKey] = useState('all');
   const [cart, setCart] = useState<CartEntry[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
 
-  const filteredProducts = filter === 'Todos'
+  const categories = categoryKeys.map(k => t(`shop.categories.${k}`));
+  const activeCategory = t(`shop.categories.${filterKey}`);
+
+  const handleFilterChange = (selectedLocalCat: string) => {
+    const key = categoryKeys.find(k => t(`shop.categories.${k}`) === selectedLocalCat) || 'all';
+    setFilterKey(key);
+  };
+
+  const filteredProducts = filterKey === 'all'
     ? products
-    : products.filter(p => p.category === filter);
+    : products.filter(p => {
+      const cat = lang === 'en' ? p.category_en : p.category_es;
+      return cat === activeCategory;
+    });
 
   const addToCart = (product: Product) => {
     setCart(prev => {
@@ -61,13 +74,13 @@ export default function ShopSection() {
             animate={{ opacity: 1, y: 0 }}
           >
             <SectionTitle
-              title="Nuestra Tienda"
-              subtitle="Explora nuestros trabajos y agrega los que te interesen al carrito para cotizar por WhatsApp."
+              title={t('shop.title')}
+              subtitle={t('shop.subtitle')}
             />
           </motion.div>
 
           <div className="flex items-center gap-6">
-            <FilterBar categories={categories} active={filter} onChange={setFilter} />
+            <FilterBar categories={categories} active={activeCategory} onChange={handleFilterChange} />
 
             <button
               onClick={() => setCartOpen(true)}
