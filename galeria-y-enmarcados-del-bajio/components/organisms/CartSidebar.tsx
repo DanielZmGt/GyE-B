@@ -5,6 +5,7 @@ import { X, ShoppingCart, MessageCircle } from 'lucide-react';
 import CartItemComponent from '../molecules/CartItem';
 import type { Product } from '../../data/products';
 import { formatPrice } from '../../data/products';
+import { useLanguage } from '../../app/i18n-context';
 
 export type CartEntry = {
   product: Product;
@@ -19,15 +20,17 @@ type CartSidebarProps = {
 };
 
 export default function CartSidebar({ cart, onClose, onUpdateQuantity, onRemove }: CartSidebarProps) {
+  const { lang, t } = useLanguage();
   const totalPrice = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   const sendWhatsApp = () => {
     const phone = '15419166276';
-    const lines = cart.map(
-      item => `- ${item.product.title} x${item.quantity} (${formatPrice(item.product.price * item.quantity)})`
-    );
+    const lines = cart.map(item => {
+      const title = lang === 'en' ? item.product.title_en : item.product.title_es;
+      return `- ${title} x${item.quantity} (${formatPrice(item.product.price * item.quantity)})`;
+    });
     const message = encodeURIComponent(
-      `Hola! Me gustaria cotizar los siguientes productos:\n\n${lines.join('\n')}\n\nTotal estimado: ${formatPrice(totalPrice)}\n\nQuedo al pendiente, gracias!`
+      `${t('cart.whatsappMessage')}\n\n${lines.join('\n')}\n\n${t('cart.estimatedTotalMsg')} ${formatPrice(totalPrice)}\n\n${t('cart.closingMsg')}`
     );
     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
   };
@@ -49,7 +52,7 @@ export default function CartSidebar({ cart, onClose, onUpdateQuantity, onRemove 
         className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-brand-bg border-l border-brand-surface shadow-2xl flex flex-col"
       >
         <div className="flex items-center justify-between p-6 border-b border-brand-surface">
-          <h2 className="font-serif text-2xl">Carrito</h2>
+          <h2 className="font-serif text-2xl">{t('cart.title')}</h2>
           <button
             onClick={onClose}
             className="text-brand-text-muted hover:text-brand-text transition-colors"
@@ -62,7 +65,7 @@ export default function CartSidebar({ cart, onClose, onUpdateQuantity, onRemove 
           {cart.length === 0 ? (
             <div className="text-center py-12">
               <ShoppingCart className="w-12 h-12 text-brand-surface mx-auto mb-4" />
-              <p className="text-brand-text-muted font-light">Tu carrito esta vacio</p>
+              <p className="text-brand-text-muted font-light">{t('cart.empty')}</p>
             </div>
           ) : (
             <div className="space-y-6">
@@ -82,18 +85,18 @@ export default function CartSidebar({ cart, onClose, onUpdateQuantity, onRemove 
         {cart.length > 0 && (
           <div className="p-6 border-t border-brand-surface space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-brand-text-muted uppercase text-sm tracking-wider">Total estimado</span>
+              <span className="text-brand-text-muted uppercase text-sm tracking-wider">{t('cart.estimatedTotal')}</span>
               <span className="font-serif text-2xl text-brand-oak">{formatPrice(totalPrice)}</span>
             </div>
             <p className="text-xs text-brand-text-muted font-light">
-              * Los precios son referenciales. El precio final se confirma por WhatsApp.
+              {t('cart.disclaimer')}
             </p>
             <button
               onClick={sendWhatsApp}
               className="w-full flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white py-3 rounded-sm uppercase text-sm tracking-wider font-medium transition-colors"
             >
               <MessageCircle className="w-5 h-5" />
-              Cotizar por WhatsApp
+              {t('cart.quoteButton')}
             </button>
           </div>
         )}

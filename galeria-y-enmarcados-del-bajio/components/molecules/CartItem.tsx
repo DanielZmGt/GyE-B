@@ -1,7 +1,10 @@
+"use client";
+
 import Image from 'next/image';
 import { Plus, Minus, Trash2 } from 'lucide-react';
 import type { Product } from '../../data/products';
 import { formatPrice } from '../../data/products';
+import { useLanguage } from '../../app/i18n-context';
 
 type CartItemProps = {
   product: Product;
@@ -11,18 +14,21 @@ type CartItemProps = {
 };
 
 export default function CartItem({ product, quantity, onUpdateQuantity, onRemove }: CartItemProps) {
+  const { lang } = useLanguage();
+  const title = lang === 'en' ? product.title_en : product.title_es;
+
   return (
     <div className="flex gap-4">
       <div className="relative w-20 h-20 flex-shrink-0 border border-brand-surface rounded-sm overflow-hidden">
         <Image
           src={`/assets/${product.file}`}
-          alt={product.title}
+          alt={title}
           fill
           className="object-cover"
         />
       </div>
       <div className="flex-1 min-w-0">
-        <h4 className="font-serif text-sm truncate">{product.title}</h4>
+        <h4 className="font-serif text-sm truncate">{title}</h4>
         <p className="text-brand-oak text-sm font-medium mt-1">
           {formatPrice(product.price)}
         </p>
