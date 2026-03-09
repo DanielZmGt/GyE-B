@@ -12,9 +12,9 @@ type GalleryCardProps = {
 };
 
 export default function GalleryCard({ item, onClick }: GalleryCardProps) {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const title = lang === 'en' ? item.title_en : item.title_es;
-  const category = lang === 'en' ? item.category_en : item.category_es;
+  const category = t(`gallery.categories.${item.category}`);
 
   return (
     <motion.div
@@ -32,6 +32,7 @@ export default function GalleryCard({ item, onClick }: GalleryCardProps) {
           alt={title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          style={item.rotation ? { transform: `rotate(${item.rotation}deg)` } : {}}
         />
         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
           <Maximize2 className="text-white w-8 h-8" />

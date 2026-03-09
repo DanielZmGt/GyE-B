@@ -1,0 +1,34 @@
+
+Author: Unknown
+Art Style: Realism
+Files:
+- c:\Users\zam_z\Downloads\Photos-3-001\20180117_185136.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180110_211151.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180117_182410.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG-20180526-WA0027.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG-20180611-WA0051.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG_20180116_151224_990.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG_20180113_000640_892.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG-20180414-WA0023.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG_20180113_000611_878.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG-20180414-WA0025.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180115_145911.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG-20170814-WA0010.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180210_144327.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180124_182727.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG_20180124_182821_634.jpg
+
+Author: Unknown
+Art Style: Abstract
+Files:
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG_20180118_205519_939.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180117_170215.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180216_193917.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG-20170427-WA0005.jpg
+
+Author: Unknown
+Art Style: Showcase
+Files:
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG_20180115_150006_724.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\IMG-20150820-WA0002.jpg
+- c:\Users\zam_z\Downloads\Photos-3-001\20180416_190444.jpg

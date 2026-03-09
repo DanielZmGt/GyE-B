@@ -9,7 +9,7 @@ import Lightbox from '../molecules/Lightbox';
 import { portfolioItems, type PortfolioItem } from '../../data/portfolio';
 import { useLanguage } from '../../app/i18n-context';
 
-const categoryKeys = ['all', 'framing', 'mounting', 'maintenance'];
+const categoryKeys = ['all', 'drawings', 'paintings', 'pictures', 'posters', 'jerseys', 'objects', 'maintenance'];
 
 export default function GallerySection() {
   const { lang, t } = useLanguage();
@@ -26,10 +26,7 @@ export default function GallerySection() {
 
   const filteredItems = filterKey === 'all'
     ? portfolioItems
-    : portfolioItems.filter(item => {
-      const itemCat = lang === 'en' ? item.category_en : item.category_es;
-      return itemCat === activeCategory;
-    });
+    : portfolioItems.filter(item => item.category === filterKey);
 
   return (
     <section id="portfolio" className="py-24">

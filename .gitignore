@@ -13,3 +13,6 @@ coverage/
 !.env.example
 
 .vercel
+
+.gemini/
+gha-creds-*.json

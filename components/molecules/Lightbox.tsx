@@ -14,7 +14,7 @@ type LightboxProps = {
 export default function Lightbox({ item, onClose }: LightboxProps) {
   const { lang, t } = useLanguage();
   const title = lang === 'en' ? item.title_en : item.title_es;
-  const category = lang === 'en' ? item.category_en : item.category_es;
+  const category = t(`gallery.categories.${item.category}`);
   const desc = lang === 'en' ? item.desc_en : item.desc_es;
 
   return (
@@ -39,6 +39,7 @@ export default function Lightbox({ item, onClose }: LightboxProps) {
             alt={title}
             fill
             className="object-contain"
+            style={item.rotation ? { transform: `rotate(${item.rotation}deg)` } : {}}
           />
         </div>
         <div className="w-full md:w-1/3 text-white">
