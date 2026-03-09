@@ -23,26 +23,18 @@ defaults:
     shell: 'bash'
 
 jobs:
-  debugger:
-    if: |-
-      ${{ fromJSON(vars.GEMINI_DEBUG || vars.ACTIONS_STEP_DEBUG || false) }}
+  pre-check:
     runs-on: 'ubuntu-latest'
-    permissions:
-      contents: 'read'
     steps:
-      - name: 'Print context for debugging'
-        env:
-          DEBUG_event_name: '${{ github.event_name }}'
-          DEBUG_event__action: '${{ github.event.action }}'
-          DEBUG_event__comment__author_association: '${{ github.event.comment.author_association }}'
-          DEBUG_event__issue__author_association: '${{ github.event.issue.author_association }}'
-          DEBUG_event__pull_request__author_association: '${{ github.event.pull_request.author_association }}'
-          DEBUG_event__review__author_association: '${{ github.event.review.author_association }}'
-          DEBUG_event: '${{ toJSON(github.event) }}'
+      - name: 'Check for API Keys'
         run: |-
-          env | grep '^DEBUG_'
+          if [ -z "${{ secrets.GEMINI_API_KEY }}" ] && [ -z "${{ secrets.GOOGLE_API_KEY }}" ]; then
+            echo "::error title=Missing Authentication::GEMINI_API_KEY or GOOGLE_API_KEY secret is required. Please add it to your repository settings."
+            exit 1
+          fi
 
   dispatch:
+    needs: 'pre-check'
     # For PRs: only if not from a fork
     # For issues: only on open/reopen
     # For comments: only if user types @gemini-cli and is OWNER/MEMBER/COLLABORATOR
