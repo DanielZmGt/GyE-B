@@ -35,7 +35,7 @@ export default function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <Link
-            href="#portfolio"
+            href="/gallery"
             className="group flex items-center gap-3 bg-brand-oak text-brand-bg px-8 py-4 rounded-sm font-medium tracking-wide hover:bg-brand-oak/90 transition-all"
           >
             {t('hero.viewPortfolio')}
