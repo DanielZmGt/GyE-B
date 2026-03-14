@@ -297,9 +297,10 @@ export default function VirtualFramerSection() {
                         maxWidth: '100%',
                         maxHeight: '55vh',
                         minWidth: '250px',
-                        border: '1px solid rgba(255,255,255,0.2)'
+                        border: '2px solid white'
                       }}
                     />
+
                   </div>
                 ))}
               </div>
