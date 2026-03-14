@@ -266,9 +266,9 @@ export default function VirtualFramerSection() {
           </div>
 
           {/* Preview Stage */}
-          <div className="w-full lg:w-2/3 flex flex-col items-center sticky top-[80px] lg:top-24 z-30 order-first lg:order-last bg-brand-bg/95 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none py-6 lg:py-0 -mx-4 px-4 sm:mx-0 sm:px-0 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] lg:shadow-none">
-            <div className="mb-4 w-full flex justify-center">
-              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-4 py-2 md:px-10 md:py-4 rounded-sm uppercase tracking-[0.2em] text-[10px] md:text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-500 shadow-xl font-bold text-center">
+          <div className="w-full lg:w-2/3 flex flex-col items-center sticky top-[80px] lg:top-24 z-30 order-first lg:order-last bg-brand-bg/95 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none py-2 lg:py-0 -mx-4 px-4 sm:mx-0 sm:px-0 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] lg:shadow-none max-h-[calc(50vh-80px)] lg:max-h-none overflow-hidden">
+            <div className="mb-2 lg:mb-6 w-full flex justify-center scale-90 lg:scale-100">
+              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-4 py-1.5 md:px-10 md:py-4 rounded-sm uppercase tracking-[0.2em] text-[10px] md:text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-500 shadow-xl font-bold text-center">
                 {t('framer.upload')}
                 <input
                   type="file"
@@ -280,8 +280,8 @@ export default function VirtualFramerSection() {
               </label>
             </div>
 
-            <div className="relative p-2 md:p-20 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm flex justify-center items-center bg-white/5 dark:bg-white/[0.02] w-full min-h-[250px] md:min-h-[750px] border border-white/10 backdrop-blur-[4px] overflow-hidden">
-              <div className="scale-[0.45] sm:scale-[0.6] md:scale-100 transition-all duration-700 ease-out">
+            <div className="relative p-1 md:p-20 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm flex justify-center items-center bg-white/5 dark:bg-white/[0.02] w-full min-h-[150px] md:min-h-[750px] border border-white/10 backdrop-blur-[4px] overflow-hidden">
+              <div className="scale-[0.35] sm:scale-[0.5] md:scale-100 transition-all duration-700 ease-out">
                 {renderLayer(layers.length - 1, (
                   <div
                     className="transition-all duration-300 ease-out flex items-center justify-center bg-white/5"
@@ -292,11 +292,9 @@ export default function VirtualFramerSection() {
                     <img
                       src={previewImage}
                       alt="Artwork Preview"
-                      className="max-w-full max-h-[55vh] object-contain block shadow-[0_0_50px_rgba(0,0,0,0.3)]"
+                      className="max-w-full max-h-[25vh] md:max-h-[55vh] object-contain block shadow-[0_0_50px_rgba(0,0,0,0.3)]"
                       style={{
                         maxWidth: '100%',
-                        maxHeight: '55vh',
-                        minWidth: '250px',
                         border: '2px solid white'
                       }}
                     />
