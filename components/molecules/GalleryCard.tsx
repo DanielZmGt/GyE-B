@@ -31,8 +31,12 @@ export default function GalleryCard({ item, onClick }: GalleryCardProps) {
           src={`/assets/${item.file}`}
           alt={title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-          style={item.rotation ? { transform: `rotate(${item.rotation}deg)` } : {}}
+          className="object-cover transition-transform duration-700 ease-out"
+          style={item.rotation
+            ? {
+                transform: `rotate(${item.rotation}deg) scale(${[90, 270].includes(item.rotation) ? 1.42 : 1})`,
+              }
+            : {}}
         />
         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
           <Maximize2 className="text-white w-8 h-8" />
