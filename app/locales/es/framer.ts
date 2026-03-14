@@ -8,4 +8,6 @@ export const framer = {
     thin: 'Delgado',
     wide: 'Ancho',
     upload: 'Sube tu Obra',
+    disclaimer: 'Nota: Los marcos virtuales son solo una referencia visual. Aunque intentamos ser lo más precisos posible, las piezas de madera natural varían y pueden diferir de la vista previa digital.',
+    matColorCategory: 'Seleccionar Categoría de Color',
 };

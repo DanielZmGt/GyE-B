@@ -35,35 +35,73 @@ export const moldings = [
 
 export const matColorGroups = [
   {
-    name_es: 'Neutros',
-    name_en: 'Neutrals',
+    name_es: 'Blancos y Cremas',
+    name_en: 'Whites & Creams',
     colors: [
       { name_es: 'Blanco Puro', name_en: 'Pure White', value: '#FFFFFF' },
       { name_es: 'Blanco Antiguo', name_en: 'Antique White', value: '#F5F5F0' },
-      { name_es: 'Crema', name_en: 'Cream', value: '#FFFDD0' },
+      { name_es: 'Blanco Nieve', name_en: 'Snow White', value: '#F8FBF8' },
+      { name_es: 'Crema Suave', name_en: 'Soft Cream', value: '#FFFDD0' },
+      { name_es: 'Marfil', name_en: 'Ivory', value: '#FFFFF0' },
+      { name_es: 'Lino', name_en: 'Linen', value: '#FAF0E6' },
+      { name_es: 'Conchaperla', name_en: 'Pearl', value: '#F0EAD6' },
+      { name_es: 'Vainilla', name_en: 'Vanilla', value: '#F3E5AB' },
+    ]
+  },
+  {
+    name_es: 'Gris y Carbón',
+    name_en: 'Grays & Charcoal',
+    colors: [
       { name_es: 'Gris Suave', name_en: 'Soft Gray', value: '#D3D3D3' },
+      { name_es: 'Gris Plata', name_en: 'Silver Gray', value: '#C0C0C0' },
+      { name_es: 'Gris Humo', name_en: 'Smoke Gray', value: '#708090' },
+      { name_es: 'Gris Ceniza', name_en: 'Ash Gray', value: '#B2BEB5' },
       { name_es: 'Carbón', name_en: 'Charcoal', value: '#36454F' },
+      { name_es: 'Gris Pizarra', name_en: 'Slate', value: '#2F4F4F' },
       { name_es: 'Negro Galería', name_en: 'Gallery Black', value: '#1a1a1a' },
+      { name_es: 'Negro Mate', name_en: 'Matte Black', value: '#000000' },
     ]
   },
   {
-    name_es: 'Llamativos',
-    name_en: 'Bolds',
+    name_es: 'Cálidos y Terrosos',
+    name_en: 'Warm & Earthy',
     colors: [
-      { name_es: 'Azul Marino', name_en: 'Navy Blue', value: '#1B2A4A' },
-      { name_es: 'Borgoña', name_en: 'Burgundy', value: '#4A1B1B' },
-      { name_es: 'Verde Bosque', name_en: 'Forest Green', value: '#1B3022' },
-      { name_es: 'Ciruela Profundo', name_en: 'Deep Plum', value: '#361B30' },
-    ]
-  },
-  {
-    name_es: 'Terrosos',
-    name_en: 'Earthy',
-    colors: [
-      { name_es: 'Verde Salvia', name_en: 'Sage Green', value: '#8A9A5B' },
+      { name_es: 'Arena', name_en: 'Sand', value: '#C2B280' },
       { name_es: 'Ocre', name_en: 'Ochre', value: '#CC7722' },
       { name_es: 'Terracota', name_en: 'Terracotta', value: '#E2725B' },
-      { name_es: 'Azul Pizarra', name_en: 'Slate Blue', value: '#708090' },
+      { name_es: 'Siena', name_en: 'Sienna', value: '#A0522D' },
+      { name_es: 'Arcilla', name_en: 'Clay', value: '#B66A50' },
+      { name_es: 'Café', name_en: 'Coffee', value: '#6F4E37' },
+      { name_es: 'Canela', name_en: 'Cinnamon', value: '#D2691E' },
+      { name_es: 'Bronceado', name_en: 'Tan', value: '#D2B48C' },
+    ]
+  },
+  {
+    name_es: 'Azules y Verdes',
+    name_en: 'Blues & Greens',
+    colors: [
+      { name_es: 'Azul Marino', name_en: 'Navy Blue', value: '#1B2A4A' },
+      { name_es: 'Azul Real', name_en: 'Royal Blue', value: '#002366' },
+      { name_es: 'Azul Pizarra', name_en: 'Slate Blue', value: '#6A5ACD' },
+      { name_es: 'Verde Bosque', name_en: 'Forest Green', value: '#1B3022' },
+      { name_es: 'Verde Salvia', name_en: 'Sage Green', value: '#8A9A5B' },
+      { name_es: 'Verde Oliva', name_en: 'Olive Green', value: '#556B2F' },
+      { name_es: 'Verde Cazador', name_en: 'Hunter Green', value: '#355E3B' },
+      { name_es: 'Turquesa Oscuro', name_en: 'Dark Teal', value: '#008080' },
+    ]
+  },
+  {
+    name_es: 'Rojos y Purpúreos',
+    name_en: 'Reds & Purples',
+    colors: [
+      { name_es: 'Borgoña', name_en: 'Burgundy', value: '#4A1B1B' },
+      { name_es: 'Rojo Vino', name_en: 'Wine Red', value: '#722F37' },
+      { name_es: 'Carmesí', name_en: 'Crimson', value: '#990000' },
+      { name_es: 'Ciruela Profundo', name_en: 'Deep Plum', value: '#361B30' },
+      { name_es: 'Berenjena', name_en: 'Eggplant', value: '#614051' },
+      { name_es: 'Amatista', name_en: 'Amethyst', value: '#9966CC' },
+      { name_es: 'Ladrillo', name_en: 'Brick Red', value: '#CB4154' },
+      { name_es: 'Mauve', name_en: 'Mauve', value: '#E0B0FF' },
     ]
   }
 ];

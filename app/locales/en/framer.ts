@@ -8,4 +8,6 @@ export const framer = {
     thin: 'Thin',
     wide: 'Wide',
     upload: 'Upload Your Artwork',
+    disclaimer: 'Note: Virtual frames are for visual reference only. While we aim for color accuracy, natural wood tones vary and may differ from the digital preview.',
+    matColorCategory: 'Select Color Category',
 };
