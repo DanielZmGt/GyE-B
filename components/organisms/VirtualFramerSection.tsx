@@ -77,7 +77,7 @@ export default function VirtualFramerSection() {
     
     return (
       <div
-        className={`relative transition-all duration-300 ease-out flex ${isActive ? 'ring-2 ring-brand-oak/50 ring-inset' : ''}`}
+        className={`relative transition-all duration-300 ease-out flex ${isActive ? 'ring-2 ring-brand-oak ring-inset shadow-lg' : ''}`}
         style={{
           borderWidth: `${layer.size}px`,
           borderStyle: 'solid',
@@ -99,7 +99,7 @@ export default function VirtualFramerSection() {
   };
 
   return (
-    <section id="virtual-framer" className="py-24 bg-brand-surface/30">
+    <section id="virtual-framer" className="py-24 bg-brand-surface/10 dark:bg-black/20 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16">
           <SectionTitle
@@ -115,8 +115,8 @@ export default function VirtualFramerSection() {
           <div className="w-full lg:w-1/3 space-y-8">
             
             {/* Layer Management */}
-            <div className="bg-white/40 backdrop-blur-sm p-6 rounded-sm border border-brand-surface shadow-sm">
-              <div className="flex justify-between items-center mb-6 border-b border-brand-oak/20 pb-2">
+            <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md p-6 rounded-sm border border-brand-surface/50 dark:border-white/10 shadow-xl transition-colors">
+              <div className="flex justify-between items-center mb-6 border-b border-brand-oak/20 pb-4">
                 <div className="flex items-center gap-2">
                   <Layers size={18} className="text-brand-oak" />
                   <h3 className="text-sm uppercase tracking-widest text-brand-oak font-bold">
@@ -138,24 +138,26 @@ export default function VirtualFramerSection() {
                   <div 
                     key={layer.id}
                     onClick={() => setActiveLayerIndex(idx)}
-                    className={`p-4 border rounded-sm cursor-pointer transition-all ${activeLayerIndex === idx ? 'border-brand-oak bg-white ring-1 ring-brand-oak/20 shadow-md scale-[1.02]' : 'border-brand-surface bg-white/30 hover:bg-white/50'}`}
+                    className={`p-4 border rounded-sm cursor-pointer transition-all ${activeLayerIndex === idx 
+                      ? 'border-brand-oak bg-white dark:bg-white/10 ring-1 ring-brand-oak/20 shadow-md scale-[1.02]' 
+                      : 'border-brand-surface dark:border-white/5 bg-white/30 dark:bg-white/5 hover:bg-white/50 dark:hover:bg-white/10'}`}
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3">
-                        <div className={`w-2 h-2 rounded-full ${activeLayerIndex === idx ? 'bg-brand-oak animate-pulse' : 'bg-brand-surface'}`} />
-                        <span className="text-[11px] uppercase tracking-widest font-bold text-brand-text">
+                        <div className={`w-2 h-2 rounded-full ${activeLayerIndex === idx ? 'bg-brand-oak animate-pulse' : 'bg-brand-surface dark:bg-white/20'}`} />
+                        <span className={`text-[11px] uppercase tracking-widest font-bold ${activeLayerIndex === idx ? 'text-brand-oak' : 'text-brand-text dark:text-white/70'}`}>
                           {idx === 0 ? (lang === 'en' ? 'Layer 1 (Innermost)' : 'Capa 1 (Interior)') : (lang === 'en' ? `Layer ${idx + 1}` : `Capa ${idx + 1}`)}
                         </span>
                       </div>
                       <div className="flex items-center gap-3">
-                        {activeLayerIndex === idx ? <ChevronUp size={16} className="text-brand-oak" /> : <ChevronDown size={16} className="text-brand-text-muted" />}
+                        {activeLayerIndex === idx ? <ChevronUp size={16} className="text-brand-oak" /> : <ChevronDown size={16} className="text-brand-text-muted dark:text-white/40" />}
                         {layers.length > 1 && (
                           <button 
                             onClick={(e) => {
                               e.stopPropagation();
                               removeLayer(idx);
                             }} 
-                            className="text-red-400 hover:text-red-600 p-1"
+                            className="text-red-400 hover:text-red-600 p-1 transition-colors"
                           >
                             <Trash2 size={14} />
                           </button>
@@ -166,7 +168,7 @@ export default function VirtualFramerSection() {
                     {activeLayerIndex === idx && (
                       <div className="space-y-5 mt-6 animate-in fade-in slide-in-from-top-2 duration-300" onClick={(e) => e.stopPropagation()}>
                         {/* Molding Grid */}
-                        <div className="grid grid-cols-2 gap-3 max-h-[220px] overflow-y-auto pr-2 custom-scrollbar">
+                        <div className="grid grid-cols-2 gap-3 max-h-[220px] overflow-y-auto pr-2 custom-scrollbar border-t border-brand-oak/5 pt-4">
                           {moldings.map((molding) => (
                             <MoldingOption
                               key={molding.name_en}
@@ -178,10 +180,10 @@ export default function VirtualFramerSection() {
                         </div>
                         
                         {/* Width Slider */}
-                        <div className="bg-brand-surface/20 p-3 rounded-sm">
-                          <label className="text-[10px] text-brand-text-muted uppercase mb-2 flex justify-between font-bold">
+                        <div className="bg-brand-surface/20 dark:bg-white/5 p-4 rounded-sm border border-brand-surface/30 dark:border-white/5">
+                          <label className="text-[10px] text-brand-text-muted dark:text-white/50 uppercase mb-3 flex justify-between font-bold">
                             <span>{t('framer.thin')} — {t('framer.wide')}</span>
-                            <span className="text-brand-oak text-xs">{layer.size}px</span>
+                            <span className="text-brand-oak text-xs font-mono">{layer.size}px</span>
                           </label>
                           <input
                             type="range"
@@ -200,15 +202,15 @@ export default function VirtualFramerSection() {
             </div>
 
             {/* Mat Board Settings */}
-            <div className="bg-white/40 backdrop-blur-sm p-6 rounded-sm border border-brand-surface shadow-sm">
-              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-6 border-b border-brand-oak/20 pb-2 font-bold">
+            <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md p-6 rounded-sm border border-brand-surface/50 dark:border-white/10 shadow-xl transition-colors">
+              <h3 className="text-sm uppercase tracking-widest text-brand-oak mb-6 border-b border-brand-oak/20 pb-4 font-bold">
                 {t('framer.step2')}
               </h3>
 
-              <div className="mb-8 bg-brand-surface/20 p-3 rounded-sm">
-                <label className="text-[10px] text-brand-text-muted uppercase mb-2 flex justify-between font-bold">
+              <div className="mb-8 bg-brand-surface/20 dark:bg-white/5 p-4 rounded-sm border border-brand-surface/30 dark:border-white/5">
+                <label className="text-[10px] text-brand-text-muted dark:text-white/50 uppercase mb-3 flex justify-between font-bold">
                   <span>{t('framer.matSize')}</span>
-                  <span className="text-brand-oak text-xs">{matWidth}px</span>
+                  <span className="text-brand-oak text-xs font-mono">{matWidth}px</span>
                 </label>
                 <input
                   type="range"
@@ -221,21 +223,23 @@ export default function VirtualFramerSection() {
               </div>
 
               <div className="space-y-3">
-                <label className="text-[10px] uppercase tracking-widest text-brand-text-muted font-bold block mb-2">
+                <label className="text-[10px] uppercase tracking-widest text-brand-text-muted dark:text-white/50 font-bold block mb-3">
                   {t('framer.matColorCategory')}
                 </label>
                 {matColorGroups.map((group, gIdx) => (
-                  <div key={group.name_en} className="border border-brand-surface rounded-sm overflow-hidden bg-white/50">
+                  <div key={group.name_en} className="border border-brand-surface/50 dark:border-white/10 rounded-sm overflow-hidden bg-white/50 dark:bg-transparent">
                     <button
                       onClick={() => setOpenMatGroupIndex(openMatGroupIndex === gIdx ? -1 : gIdx)}
-                      className={`w-full flex justify-between items-center p-3 text-[11px] uppercase tracking-wider transition-colors ${openMatGroupIndex === gIdx ? 'bg-brand-oak text-brand-bg font-bold' : 'hover:bg-brand-surface/50'}`}
+                      className={`w-full flex justify-between items-center p-3 text-[11px] uppercase tracking-wider transition-all ${openMatGroupIndex === gIdx 
+                        ? 'bg-brand-oak text-brand-bg font-bold' 
+                        : 'hover:bg-brand-surface/50 dark:hover:bg-white/5 text-brand-text dark:text-white/80'}`}
                     >
                       {lang === 'en' ? group.name_en : group.name_es}
                       {openMatGroupIndex === gIdx ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                     </button>
                     
                     {openMatGroupIndex === gIdx && (
-                      <div className="p-4 grid grid-cols-4 gap-3 animate-in fade-in duration-200">
+                      <div className="p-4 grid grid-cols-4 gap-3 animate-in fade-in duration-200 bg-white/30 dark:bg-black/20">
                         {group.colors.map((color) => (
                           <ColorSwatch
                             key={color.name_en}
@@ -253,9 +257,9 @@ export default function VirtualFramerSection() {
             </div>
 
             {/* Disclaimer */}
-            <div className="bg-amber-50/50 border border-amber-200/50 p-4 rounded-sm flex gap-3 items-start">
-              <AlertCircle size={18} className="text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-[10px] leading-relaxed text-amber-800/80 italic">
+            <div className="bg-amber-50/80 dark:bg-amber-900/20 border border-amber-200/50 dark:border-amber-700/30 p-5 rounded-sm flex gap-4 items-start shadow-sm">
+              <AlertCircle size={20} className="text-amber-600 dark:text-amber-500 shrink-0 mt-0.5" />
+              <p className="text-[11px] leading-relaxed text-amber-900/80 dark:text-amber-200/70 italic font-medium">
                 {t('framer.disclaimer')}
               </p>
             </div>
@@ -263,8 +267,8 @@ export default function VirtualFramerSection() {
 
           {/* Preview Stage */}
           <div className="w-full lg:w-2/3 flex flex-col items-center sticky top-8">
-            <div className="mb-8 w-full flex justify-center">
-              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-8 py-3 rounded-sm uppercase tracking-widest text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-300 shadow-lg">
+            <div className="mb-10 w-full flex justify-center">
+              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-10 py-4 rounded-sm uppercase tracking-[0.2em] text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-500 shadow-xl font-bold">
                 {t('framer.upload')}
                 <input
                   type="file"
@@ -276,11 +280,11 @@ export default function VirtualFramerSection() {
               </label>
             </div>
 
-            <div className="relative p-12 md:p-20 shadow-2xl rounded-sm flex justify-center items-center bg-white/10 w-full min-h-[700px] border border-white/20 backdrop-blur-[2px]">
-              <div className="scale-[0.8] md:scale-100 transition-transform duration-500">
+            <div className="relative p-12 md:p-20 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm flex justify-center items-center bg-white/5 dark:bg-white/[0.02] w-full min-h-[750px] border border-white/10 backdrop-blur-[4px]">
+              <div className="scale-[0.75] md:scale-100 transition-all duration-700 ease-out">
                 {renderLayer(layers.length - 1, (
                   <div
-                    className="transition-all duration-300 ease-out flex items-center justify-center"
+                    className="transition-all duration-300 ease-out flex items-center justify-center bg-white/5"
                     style={{
                       padding: `${matWidth}px`
                     }}
@@ -288,12 +292,12 @@ export default function VirtualFramerSection() {
                     <img
                       src={previewImage}
                       alt="Artwork Preview"
-                      className="max-w-full max-h-[50vh] object-contain block shadow-inner"
+                      className="max-w-full max-h-[55vh] object-contain block shadow-[0_0_50px_rgba(0,0,0,0.3)]"
                       style={{
                         maxWidth: '100%',
-                        maxHeight: '50vh',
-                        minWidth: '200px',
-                        border: '1px solid rgba(255,255,255,0.3)'
+                        maxHeight: '55vh',
+                        minWidth: '250px',
+                        border: '1px solid rgba(255,255,255,0.2)'
                       }}
                     />
                   </div>
@@ -301,12 +305,12 @@ export default function VirtualFramerSection() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center gap-2 text-brand-text-muted">
-              <div className="w-12 h-[1px] bg-brand-surface" />
-              <div className="text-[10px] uppercase tracking-[0.2em] font-medium">
+            <div className="mt-10 flex items-center gap-4 text-brand-text-muted dark:text-white/20">
+              <div className="w-16 h-[1px] bg-brand-surface dark:bg-white/10" />
+              <div className="text-[11px] uppercase tracking-[0.3em] font-bold">
                 {lang === 'en' ? 'Professional Digital Visualization' : 'Visualización Digital Profesional'}
               </div>
-              <div className="w-12 h-[1px] bg-brand-surface" />
+              <div className="w-16 h-[1px] bg-brand-surface dark:bg-white/10" />
             </div>
           </div>
         </div>
