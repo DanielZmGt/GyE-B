@@ -25,7 +25,7 @@ export default function Hero() {
         <p className="text-brand-oak uppercase tracking-[0.3em] text-sm md:text-base mb-6 font-medium">
           {t('hero.subtitle')}
         </p>
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium mb-8 leading-tight text-brand-text">
+        <h1 className="font-serif text-4xl md:text-7xl lg:text-8xl font-medium mb-8 leading-tight text-brand-text">
           {t('hero.titlePre')} <br className="hidden md:block" />
           <span className="italic text-brand-text-muted">{t('hero.titleHighlight')}</span>
         </h1>

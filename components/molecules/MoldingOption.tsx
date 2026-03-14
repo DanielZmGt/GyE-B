@@ -18,11 +18,11 @@ export default function MoldingOption({ molding, selected, onClick }: MoldingOpt
     <button
       onClick={onClick}
       className={`flex items-center gap-4 p-2 rounded-sm border transition-all ${selected
-          ? 'border-brand-oak bg-brand-oak/10'
-          : 'border-brand-surface hover:border-brand-text-muted/50'
+          ? 'border-brand-oak bg-brand-oak/10 text-brand-oak'
+          : 'border-brand-surface hover:border-brand-oak/50 text-brand-text'
         }`}
     >
-      <div className="relative w-12 h-12 flex-shrink-0 border border-brand-surface">
+      <div className="relative w-12 h-12 flex-shrink-0 border border-brand-surface overflow-hidden">
         <Image
           src={molding.file}
           alt={name}
@@ -30,7 +30,7 @@ export default function MoldingOption({ molding, selected, onClick }: MoldingOpt
           className="object-cover"
         />
       </div>
-      <span className="text-xs uppercase tracking-wider text-left">{name}</span>
+      <span className="text-[10px] uppercase tracking-wider text-left font-medium leading-tight">{name}</span>
     </button>
   );
 }
