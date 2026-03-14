@@ -10,8 +10,8 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-24 bg-brand-surface/20 border-t border-brand-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="relative px-4 sm:px-0">
             <div className="aspect-[4/5] relative border-4 border-brand-surface z-10">
               <Image
                 src="https://picsum.photos/800/1000?random=20"
@@ -21,8 +21,8 @@ export default function AboutSection() {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="absolute -bottom-8 -right-8 w-2/3 aspect-square bg-brand-oak/10 border border-brand-oak/30 z-0" />
-            <div className="absolute -top-8 -left-8 w-1/2 aspect-square bg-brand-walnut/20 border border-brand-walnut/30 z-0" />
+            <div className="absolute -bottom-4 -right-4 md:-bottom-8 md:-right-8 w-2/3 aspect-square bg-brand-oak/10 border border-brand-oak/30 z-0" />
+            <div className="absolute -top-4 -left-4 md:-top-8 md:-left-8 w-1/2 aspect-square bg-brand-walnut/20 border border-brand-walnut/30 z-0" />
           </div>
 
           <div>

@@ -266,9 +266,9 @@ export default function VirtualFramerSection() {
           </div>
 
           {/* Preview Stage */}
-          <div className="w-full lg:w-2/3 flex flex-col items-center sticky top-8">
-            <div className="mb-10 w-full flex justify-center">
-              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-10 py-4 rounded-sm uppercase tracking-[0.2em] text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-500 shadow-xl font-bold">
+          <div className="w-full lg:w-2/3 flex flex-col items-center lg:sticky lg:top-24 order-first lg:order-last">
+            <div className="mb-6 w-full flex justify-center">
+              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-6 py-3 md:px-10 md:py-4 rounded-sm uppercase tracking-[0.2em] text-xs md:text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-500 shadow-xl font-bold text-center">
                 {t('framer.upload')}
                 <input
                   type="file"
@@ -280,8 +280,8 @@ export default function VirtualFramerSection() {
               </label>
             </div>
 
-            <div className="relative p-12 md:p-20 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm flex justify-center items-center bg-white/5 dark:bg-white/[0.02] w-full min-h-[750px] border border-white/10 backdrop-blur-[4px]">
-              <div className="scale-[0.75] md:scale-100 transition-all duration-700 ease-out">
+            <div className="relative p-4 md:p-20 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm flex justify-center items-center bg-white/5 dark:bg-white/[0.02] w-full min-h-[400px] md:min-h-[750px] border border-white/10 backdrop-blur-[4px] overflow-hidden">
+              <div className="scale-[0.6] sm:scale-[0.8] md:scale-100 transition-all duration-700 ease-out">
                 {renderLayer(layers.length - 1, (
                   <div
                     className="transition-all duration-300 ease-out flex items-center justify-center bg-white/5"
