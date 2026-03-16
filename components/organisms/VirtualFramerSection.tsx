@@ -6,7 +6,7 @@ import ColorSwatch from '../atoms/ColorSwatch';
 import MoldingOption from '../molecules/MoldingOption';
 import { moldings, matColorGroups } from '../../data/moldings';
 import { useLanguage } from '../../app/i18n-context';
-import { Plus, Trash2, ChevronDown, ChevronUp, AlertCircle, Layers } from 'lucide-react';
+import { Plus, Trash2, ChevronDown, ChevronUp, AlertCircle, Layers, Upload } from 'lucide-react';
 
 type FrameLayer = {
   id: string;
@@ -266,10 +266,11 @@ export default function VirtualFramerSection() {
           </div>
 
           {/* Preview Stage */}
-          <div className="w-full lg:w-2/3 flex flex-col items-center sticky top-[80px] lg:top-24 z-30 order-first lg:order-last bg-brand-bg/95 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none py-2 lg:py-0 -mx-4 px-4 sm:mx-0 sm:px-0 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] lg:shadow-none max-h-[calc(50vh-80px)] lg:max-h-none overflow-hidden">
-            <div className="mb-2 lg:mb-6 w-full flex justify-center scale-90 lg:scale-100">
-              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-4 py-1.5 md:px-10 md:py-4 rounded-sm uppercase tracking-[0.2em] text-[10px] md:text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-500 shadow-xl font-bold text-center">
-                {t('framer.upload')}
+          <div className="w-full lg:w-2/3 flex flex-col items-center sticky top-[80px] lg:top-24 z-30 order-first lg:order-last bg-brand-bg/95 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none py-1 lg:py-0 -mx-4 px-4 sm:mx-0 sm:px-0 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.2)] lg:shadow-none max-h-[calc(50vh-80px)] lg:max-h-none overflow-hidden">
+            <div className="mb-1 lg:mb-6 w-full flex justify-center scale-[0.8] lg:scale-100">
+              <label className="cursor-pointer bg-brand-oak border border-brand-oak text-brand-bg px-4 py-1.5 md:px-10 md:py-4 rounded-sm uppercase tracking-[0.2em] text-[10px] md:text-sm hover:bg-transparent hover:text-brand-oak transition-all duration-500 shadow-xl font-bold flex items-center gap-2">
+                <Upload size={14} className="md:w-4 md:h-4" />
+                <span>{t('framer.upload')}</span>
                 <input
                   type="file"
                   className="hidden"
@@ -280,11 +281,11 @@ export default function VirtualFramerSection() {
               </label>
             </div>
 
-            <div className="relative p-1 md:p-20 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm flex justify-center items-center bg-white/5 dark:bg-white/[0.02] w-full min-h-[150px] md:min-h-[750px] border border-white/10 backdrop-blur-[4px] overflow-hidden">
-              <div className="scale-[0.35] sm:scale-[0.5] md:scale-100 transition-all duration-700 ease-out">
+            <div className="relative p-0 md:p-20 flex justify-center items-center w-full min-h-0 md:min-h-[750px] overflow-hidden">
+              <div className="scale-[0.5] sm:scale-[0.7] md:scale-100 transition-all duration-700 ease-out origin-center">
                 {renderLayer(layers.length - 1, (
                   <div
-                    className="transition-all duration-300 ease-out flex items-center justify-center bg-white/5"
+                    className="transition-all duration-300 ease-out flex items-center justify-center"
                     style={{
                       padding: `${matWidth}px`
                     }}
@@ -292,10 +293,10 @@ export default function VirtualFramerSection() {
                     <img
                       src={previewImage}
                       alt="Artwork Preview"
-                      className="max-w-full max-h-[25vh] md:max-h-[55vh] object-contain block shadow-[0_0_50px_rgba(0,0,0,0.3)]"
+                      className="max-w-full max-h-[40vh] md:max-h-[55vh] object-contain block shadow-[0_0_50px_rgba(0,0,0,0.3)]"
                       style={{
                         maxWidth: '100%',
-                        border: '2px solid white'
+                        border: '1px solid white'
                       }}
                     />
 
@@ -304,7 +305,7 @@ export default function VirtualFramerSection() {
               </div>
             </div>
 
-            <div className="mt-6 hidden md:flex items-center gap-4 text-brand-text-muted dark:text-white/20">
+            <div className="mt-4 hidden md:flex items-center gap-4 text-brand-text-muted dark:text-white/20">
               <div className="w-16 h-[1px] bg-brand-surface dark:bg-white/10" />
               <div className="text-[11px] uppercase tracking-[0.3em] font-bold">
                 {lang === 'en' ? 'Professional Digital Visualization' : 'Visualización Digital Profesional'}
